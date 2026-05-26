@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrawl</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+
+  
+  <div id="toolbar-name">
+    <input
+      type="text"
+      id="window-name-input"
+      maxlength="30"
+      placeholder="Untitled"
+      autocomplete="off"
+      spellcheck="false"
+      aria-label="Window name"
+    >
+    <button
+      id="color-swatch"
+      aria-label="Change color theme"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <span class="swatch-dot" aria-hidden="true"></span>
+    </button>
+
+    
+    <div id="color-picker" role="dialog" aria-label="Color theme" hidden>
+      <button class="color-option" data-color="#4a90e2" aria-label="Blue" aria-pressed="true"></button>
+      <button class="color-option" data-color="#5cb85c" aria-label="Green" aria-pressed="false"></button>
+      <button class="color-option" data-color="#f0ad4e" aria-label="Yellow" aria-pressed="false"></button>
+      <button class="color-option" data-color="#ff8c42" aria-label="Orange" aria-pressed="false"></button>
+      <button class="color-option" data-color="#d9534f" aria-label="Red" aria-pressed="false"></button>
+      <button class="color-option" data-color="#9b59b6" aria-label="Purple" aria-pressed="false"></button>
+      <button class="color-option" data-color="#777777" aria-label="Grey" aria-pressed="false"></button>
+    </div>
+  </div>
+
+  
+  <div id="toolbar-actions">
+    <button id="btn-download" aria-label="Download as .txt">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 15V3"/>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+        <path d="m7 10 5 5 5-5"/>
+      </svg>
+    </button>
+
+    <div class="copy-wrapper">
+      <button
+        id="btn-copy"
+        aria-label="Copy notepad"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+        </svg>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+
+      <!-- Copy dropdown menu -->
+      <div id="copy-menu" role="menu" aria-label="Copy options" hidden>
+        <button id="btn-copy-plain" role="menuitem">As plain text</button>
+        <button id="btn-copy-markdown" role="menuitem">As markdown</button>
+      </div>
+    </div>
+
+    <span class="toolbar-sep" aria-hidden="true"></span>
+
+    <!-- Font family for entire notepad -->
+    <select id="font-family-select" aria-label="Font family">
+      <option value="">Default</option>
+      <option value="Arial, sans-serif">Arial</option>
+      <option value="Verdana, sans-serif">Verdana</option>
+      <option value='"Trebuchet MS", sans-serif'>Trebuchet</option>
+      <option value="Georgia, serif">Georgia</option>
+      <option value='"Times New Roman", serif'>Times NR</option>
+      <option value='"Courier New", monospace'>Courier</option>
+      <option value='"Comic Sans MS", cursive'>Comic Sans</option>
+      <option value="Impact, fantasy">Impact</option>
+    </select>
+
+    <span class="toolbar-sep" aria-hidden="true"></span>
+
+    <!-- Text size for selection -->
+    <button id="btn-font-increase" aria-label="Increase selected text size">A<sup class="btn-sup">+</sup></button>
+    <button id="btn-font-decrease" aria-label="Decrease selected text size">A<sup class="btn-sup">−</sup></button>
+
+    <!-- Insert code block -->
+    <button id="btn-code-block" aria-label="Insert code block">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="16 18 22 12 16 6"/>
+        <polyline points="8 6 2 12 8 18"/>
+      </svg>
+    </button>
+
+    <!-- Text color for selection -->
+    <button id="btn-text-color" aria-label="Change selected text color">
+      <span class="text-color-btn">
+        <span class="text-color-letter">A</span>
+        <span class="text-color-bar" id="text-color-bar"></span>
+      </span>
+    </button>
+
+    <button
+      id="btn-settings"
+      aria-label="Settings"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+    >
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/>
+        <circle cx="12" cy="12" r="3"/>
+      </svg>
+    </button>
+
+    <button id="btn-timestamp" aria-label="Insert timestamp (Ctrl+Shift+T)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 6v6l4 2"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Native color picker -->
+  <input type="color" id="text-color-input" tabindex="-1" aria-hidden="true">
+
+  
+  <div id="restore-banner" role="alert" aria-live="polite" hidden>
+    <span id="restore-banner-text">Restore last notepad?</span>
+    <div class="restore-actions">
+      <button id="btn-restore">Restore</button>
+      <button id="btn-dismiss-restore">Dismiss</button>
+    </div>
+  </div>
+
+  <!--Main notepad-->
+  <div
+    id="notepad"
+    contenteditable="true"
+    role="textbox"
+    aria-multiline="true"
+    aria-label="Notepad"
+    spellcheck="true"
+    data-placeholder="Start typing…"
+    tabindex="0"
+  ></div>
+
+  <!--Status bar-->
+  <div id="status-bar" aria-hidden="true">
+    <span id="status-counts"></span>
+    <span id="status-storage"></span>
+  </div>
+
+  <!--Settings panel-->
+  <aside
+    id="settings-panel"
+    aria-label="Settings"
+    aria-modal="true"
+    role="dialog"
+    tabindex="-1"
+  >
+    <div class="settings-header">
+      <span class="settings-title">Settings</span>
+      <button id="btn-close-settings" aria-label="Close settings">✕</button>
+    </div>
+
+    <div class="settings-body">
+
+      <label class="setting-row" for="toggle-warning">
+        <span class="setting-label">Warn before window closes</span>
+        <input type="checkbox" id="toggle-warning" checked>
+      </label>
+
+      <div class="setting-row">
+        <label for="settings-window-name" class="setting-label">Window name</label>
+        <input
+          type="text"
+          id="settings-window-name"
+          maxlength="30"
+          placeholder="Untitled"
+          autocomplete="off"
+        >
+      </div>
+
+      <div class="setting-row setting-row--column">
+        <span class="setting-label">Color tint</span>
+        <div class="color-tint-row">
+          <button class="color-option" data-color="#4a90e2" aria-label="Blue" aria-pressed="true"></button>
+          <button class="color-option" data-color="#5cb85c" aria-label="Green" aria-pressed="false"></button>
+          <button class="color-option" data-color="#f0ad4e" aria-label="Yellow" aria-pressed="false"></button>
+          <button class="color-option" data-color="#ff8c42" aria-label="Orange" aria-pressed="false"></button>
+          <button class="color-option" data-color="#d9534f" aria-label="Red" aria-pressed="false"></button>
+          <button class="color-option" data-color="#9b59b6" aria-label="Purple" aria-pressed="false"></button>
+          <button class="color-option" data-color="#777777" aria-label="Grey" aria-pressed="false"></button>
+        </div>
+      </div>
+
+      <div class="setting-row setting-row--column">
+        <span class="setting-label">Appearance</span>
+        <div class="theme-toggle" role="group" aria-label="Color scheme">
+          <button class="theme-btn" data-theme="system" aria-pressed="true">System</button>
+          <button class="theme-btn" data-theme="light"  aria-pressed="false">Light</button>
+          <button class="theme-btn" data-theme="dark"   aria-pressed="false">Dark</button>
+        </div>
+      </div>
+
+      <hr class="settings-divider" aria-hidden="true">
+
+      <div class="about-section">
+        <p class="about-name">Scrawl v0.1.0</p>
+        <p class="about-desc">This notepad wipes when you close the window. Download or copy first if you want to keep anything.</p>
+      </div>
+
+    </div>
+  </aside>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
