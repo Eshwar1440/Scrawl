@@ -94,7 +94,6 @@ Notes are stored in `chrome.storage.session` (wiped on browser restart) as a blo
 ## Roadmap
 
 **Planned:**
-- Word/character count shown live in the toolbar
 - Configurable grace-period duration (1 / 5 / 15 / 30 min)
 - Right-click "Send this link to Notepad" context menu item
 - Session history to browse recently closed windows before they expire
