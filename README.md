@@ -143,7 +143,9 @@ notepad-extension/
 
 **Code style:** vanilla JS, no build step, no npm packages. Keep it that way. The goal is that anyone can understand the whole extension just by reading the source files.
 
-**Filing issues:** [GitHub Issues](https://github.com/eshwarr2005/window-notepad/issues). Please include your Chrome version, OS, and steps to reproduce.
+**Filing issues:** [GitHub Issues](https://github.com/Eshwar1440/Scrawl/issues).
+
+Please include your Chrome version, OS, and steps to reproduce.
 
 ---
 
