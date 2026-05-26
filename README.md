@@ -2,11 +2,9 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-0.1.0-blue)](manifest.json)
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-coming%20soon-lightgrey)](#install)
 
 A notepad that lives in your Chrome side panel. Each window gets its own notepad, and notes are wiped when you close the window. If you close too fast, you have 5 minutes to undo.
 
-![Hero screenshot](store-listing/screenshot-1.png)
 
 ---
 
