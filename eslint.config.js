@@ -26,7 +26,11 @@ export default [
       sourceType: 'module',
       globals: {
         ...globals.webextensions,
-        self: 'readonly',
+        self:          'readonly',
+        setTimeout:    'readonly',
+        clearTimeout:  'readonly',
+        setInterval:   'readonly',
+        clearInterval: 'readonly',
       },
     },
     rules: {
