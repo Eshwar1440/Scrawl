@@ -101,7 +101,7 @@ Notes are stored in `chrome.storage.session` (wiped on browser restart) as a blo
 - Multiple notepads per window via a tab bar
 - Global keyboard shortcut to open/focus the side panel
 
-Have a feature request? [Open an issue](https://github.com/eshwarr2005/window-notepad/issues).
+Have a feature request? [Open an issue]([https://github.com/eshwarr2005/window-notepad/issues](https://github.com/Eshwar1440/Scrawl/issues)).
 
 ---
 
