@@ -72,9 +72,6 @@ Coming soon. Once published, a one-click install link will appear here.
 3. **Capture from the web** by selecting text on any page and right-clicking "Send to Scrawl". Or right-click anywhere and choose "Send page URL to Scrawl" for a link card.
 4. **Keep or discard.** Download or copy your notes before closing if you want to keep them. Otherwise just close the window and the notes are gone.
 
-**Keyboard shortcuts:**
-- `Ctrl+Shift+T` / `Cmd+Shift+T` — insert timestamp `[HH:MM]`
-
 ---
 
 ## Architecture overview
