@@ -43,6 +43,9 @@ export function attachNotepadListeners() {
       if (savedRange) {
         savedRange.deleteContents();
         savedRange.insertNode(card);
+        if (!card.nextSibling || card.nextSibling.nodeType !== Node.TEXT_NODE) {
+          card.after(document.createTextNode('\n'));
+        }
         const afterRange = document.createRange();
         afterRange.setStartAfter(card);
         afterRange.collapse(true);
@@ -50,14 +53,15 @@ export function attachNotepadListeners() {
         sel.addRange(afterRange);
       } else {
         notepad.appendChild(card);
+        if (!card.nextSibling || card.nextSibling.nodeType !== Node.TEXT_NODE) {
+          card.after(document.createTextNode('\n'));
+        }
       }
       triggerSave();
       return;
     }
 
     // All other pastes: plain text only, no HTML
-    // execCommand is deprecated but is still the only way to insert at cursor
-    // while keeping the browser's native undo stack intact
     document.execCommand('insertText', false, rawText);
   });
 
@@ -71,6 +75,26 @@ export function attachNotepadListeners() {
       if (event.key === 'Enter') {
         event.preventDefault();
         document.execCommand('insertText', false, '\n');
+        return;
+      }
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        const block = event.target.closest('.code-block');
+        if (!block) return;
+        
+        let nodeAfter = block.nextSibling;
+        if (!nodeAfter || nodeAfter.nodeType !== Node.TEXT_NODE) {
+          nodeAfter = document.createTextNode('\n');
+          block.after(nodeAfter);
+        }
+        const range = document.createRange();
+        range.setStart(nodeAfter, 0);
+        range.collapse(true);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        notepad.focus();
+        triggerSave();
         return;
       }
     }
@@ -117,7 +141,6 @@ export function attachNotepadListeners() {
 /**
  * After the user types a space, check whether the preceding token in the
  * current text node is a valid URL. If so, wrap it in an <a> element.
- * Only walks back in the current text node.
  */
 export function tryLinkifyAtCursor() {
   const { notepad } = state.els;
@@ -243,6 +266,10 @@ export function insertCodeBlock() {
     notepad.appendChild(block);
   }
 
+  if (!block.nextSibling || block.nextSibling.nodeType !== Node.TEXT_NODE) {
+    block.after(document.createTextNode('\n'));
+  }
+
   const after = document.createRange();
   after.setStartAfter(block);
   after.collapse(true);
@@ -261,10 +288,16 @@ export function insertImageAtCursor(src) {
     while (anchor && anchor.parentNode !== notepad) anchor = anchor.parentNode;
     if (anchor && anchor.parentNode === notepad) {
       notepad.insertBefore(block, anchor.nextSibling);
+      if (!block.nextSibling || block.nextSibling.nodeType !== Node.TEXT_NODE) {
+        block.after(document.createTextNode('\n'));
+      }
       return;
     }
   }
   notepad.appendChild(block);
+  if (!block.nextSibling || block.nextSibling.nodeType !== Node.TEXT_NODE) {
+    block.after(document.createTextNode('\n'));
+  }
 }
 
 export function downloadImage(src) {

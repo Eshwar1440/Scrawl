@@ -26,11 +26,6 @@ export function sanitizeStyle(style) {
     .join('; ');
 }
 
-/**
- * Walk a detached DOM subtree and strip anything not in the safe whitelist:
- * text nodes, <br>, <span style="color/font-size">, <a href="http/https/mailto">.
- * Call this on a temp div BEFORE moving its children into the live document.
- */
 export function sanitizeDom(node) {
   for (let i = node.childNodes.length - 1; i >= 0; i--) {
     const child = node.childNodes[i];
@@ -63,11 +58,7 @@ export function sanitizeDom(node) {
   }
 }
 
-/**
- * Walk #notepad's DOM and produce a blocks array.
- * Text nodes + inline elements (spans, anchors) → 'text' blocks (safe HTML).
- * .link-card divs → 'card' blocks.
- */
+
 export function serializeContent() {
   const { notepad } = state.els;
   const blocks = [];
@@ -142,7 +133,7 @@ export function serializeContent() {
   return { version: 0, blocks };
 }
 
-/** Rebuild #notepad DOM from a v2 blocks array. */
+
 export function deserializeContent(blocks) {
   const { notepad } = state.els;
   while (notepad.firstChild) notepad.removeChild(notepad.firstChild);
@@ -164,6 +155,10 @@ export function deserializeContent(blocks) {
         notepad.appendChild(buildImageBlock(block.src));
       }
     }
+  }
+
+  if (notepad.lastChild && notepad.lastChild.nodeType !== Node.TEXT_NODE) {
+    notepad.appendChild(document.createTextNode('\n'));
   }
 }
 
