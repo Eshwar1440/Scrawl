@@ -124,7 +124,7 @@ export function serializeContent() {
       blocks.push({
         type:     'code',
         language: child.querySelector('.code-block-lang')?.value || '',
-        content:  child.querySelector('.code-block-pre')?.textContent || '',
+        content:  child.querySelector('.code-block-pre')?.innerText || '',
       });
     } else if (child.nodeType === Node.ELEMENT_NODE && child.classList.contains('image-block')) {
       flushText();

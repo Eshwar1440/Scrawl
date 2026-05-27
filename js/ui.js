@@ -55,7 +55,7 @@ export function updateStatusCounts() {
     if (child.nodeType !== Node.ELEMENT_NODE) continue;
     if (child.classList.contains('link-card') || child.classList.contains('image-block')) continue;
     if (child.classList.contains('code-block')) {
-      text += child.querySelector('.code-block-pre')?.textContent || '';
+      text += child.querySelector('.code-block-pre')?.innerText || '';
       continue;
     }
     text += child.textContent;

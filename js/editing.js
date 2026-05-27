@@ -91,7 +91,7 @@ export function attachNotepadListeners() {
     const codeCopy = event.target.closest('.code-block-copy');
     if (codeCopy) {
       const pre = codeCopy.closest('.code-block')?.querySelector('.code-block-pre');
-      if (pre) navigator.clipboard.writeText(pre.textContent).then(() => showToast('Copied!'), () => showToast('Copy failed'));
+      if (pre) navigator.clipboard.writeText(pre.innerText).then(() => showToast('Copied!'), () => showToast('Copy failed'));
       return;
     }
     const codeRemove = event.target.closest('.code-block-remove');
