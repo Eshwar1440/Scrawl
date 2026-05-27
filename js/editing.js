@@ -65,7 +65,7 @@ export function attachNotepadListeners() {
     if (event.target.classList.contains('code-block-pre')) {
       if (event.key === 'Tab') {
         event.preventDefault();
-        document.execCommand('insertText', false, '  ');
+        document.execCommand('insertText', false, '    ');
         return;
       }
       if (event.key === 'Enter') {

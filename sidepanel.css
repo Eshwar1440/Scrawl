@@ -743,7 +743,7 @@ body.settings-panel-open #settings-panel {
   white-space: pre;
   overflow-x: auto;
   outline: none;
-  tab-size: 2;
+  tab-size: 4;
   user-select: text;
   cursor: text;
 }
