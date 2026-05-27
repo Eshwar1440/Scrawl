@@ -37,8 +37,6 @@ A notepad that lives in your Chrome side panel. Each window gets its own notepad
 
 **Auto-linkify:** type a URL followed by a space and it becomes a clickable link. Works for `http`, `https`, and `mailto`. `javascript:` and `data:` links are blocked.
 
-**Timestamp shortcut:** `Ctrl+Shift+T` (or `Cmd+Shift+T` on Mac) inserts `[HH:MM]` at the cursor. Also available via the toolbar button.
-
 **Download as .txt:** export everything as a text file. The filename includes the window name and date/time.
 
 **Copy as plain text or Markdown:** link cards become `[Title](URL)` in Markdown. A "Copied!" toast confirms the action.
