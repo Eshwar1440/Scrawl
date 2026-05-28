@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Scrawl",
   "version": "0.1.0",
-  "description": "A notepad in your side panel that wipes when you close the window. Right-click to grab text or URLs. 5-minute undo if you close by mistake.",
+  "description": "A notepad in your side panel that wipes on window close.",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
